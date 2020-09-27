@@ -13,7 +13,7 @@ const Header = () => (
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
-                    <NavDropdown style={{ right: 0, left: 'auto' }} title="Opções do usuário" id="collasible-nav-dropdown">
+                    <NavDropdown title="Opções do usuário" id="collasible-nav-dropdown">
                         <NavDropdown.Item href="/">Cadastrar CEP</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href ="/ceps">Lista de CEPs</NavDropdown.Item>
