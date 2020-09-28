@@ -4,7 +4,7 @@ import { Table, Container, Row, Col } from 'react-bootstrap'
 const CepList = ({ ceps }) => (
     <Container style={{ marginTop: 120, width: '60%'}}>
         <Row className="justify-content-center">
-            <h5>CEPs cadastrados</h5>
+            <h5>Lista de CEPs cadastrados</h5>
         </Row>
         <Row className="justify-content-center">
             <Table style={{ textAlign: 'center' }} responsive size="sm" striped bordered hover variant="dark">

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
@@ -14,9 +15,15 @@ const Header = () => (
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
                     <NavDropdown title="Opções do usuário" id="collasible-nav-dropdown">
-                        <NavDropdown.Item href="/">Cadastrar CEP</NavDropdown.Item>
+                        <Link href="/ceps/new">
+                            Cadastrar CEP
+                        </Link>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href ="/ceps">Lista de CEPs</NavDropdown.Item>
+                        {/* <NavDropdown.Item> */}
+                            <Link href="/ceps">
+                                Lista de CEPs
+                            </Link>
+                        {/* </NavDropdown.Item> */}
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>

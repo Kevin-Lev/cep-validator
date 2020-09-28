@@ -1,5 +1,5 @@
-import Header from '../components/Header'
-import CepList from "../components/CepList"
+import Header from '../../components/Header'
+import CepList from "../../components/CepList"
 import fetch from 'isomorphic-unfetch'
 
 export default function CepsList({ ceps }) {

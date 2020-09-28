@@ -20,6 +20,9 @@ export default async (req, res) => {
             try {
                 const newCep = await Cep.create(req.body);
 
+                console.log('newCep')
+                console.log(newCep)
+
                 res.status(201).json({ success: true, data: newCep })
             } catch (error) {
                 console.error(error)

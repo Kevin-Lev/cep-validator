@@ -11,6 +11,9 @@ const CepSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Por favor, adicione a cidade']
         }
+    },
+    {
+        versionKey: false
     }
 )
 
