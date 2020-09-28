@@ -1,9 +1,8 @@
 import Header from "../../components/Header";
 import CepInput from "../../components/CepInput";
-import { Form, Loader } from 'semantic-ui-react'
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Container, Row, Button } from 'react-bootstrap'
+import { Container, Row, Button, Form } from 'react-bootstrap'
 
 
 export default function NewCep() {
@@ -46,6 +45,10 @@ export default function NewCep() {
             err.numbers = "Você precisa inserir um CEP"
         }
 
+        // if (form.numbers.length !== 6) {
+        //     err.wrongCepLength = "O seu CEP deve ter exatamente 6 dígitos"
+        // }
+
         if (!form.city) {
             err.city = "Você precisa inserir uma cidade"
         }
@@ -79,53 +82,32 @@ export default function NewCep() {
             <Header />
             <Container style={{ marginTop: 170 }}>
                 <Row className="justify-content-center">
-                    <h4 style={{ marginBottom: 15 }}>Validador de CEP</h4>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group controlId="formCep">
+                            <Form.Label>Digite o CEP de onde você mora</Form.Label>
+                            <Form.Control type="text" placeholder="CEP" name="numbers" maxLength="6" minLength="6" onChange={handleChange} isInvalid={errors.numbers} isValid={form.numbers && form.numbers.length === 6} />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.numbers}
+                            </Form.Control.Feedback>
+                            <Form.Text className="text-muted">
+                                Digite números entre 100000 e 999999, sem hífen.
+                            </Form.Text>
+                        </Form.Group>
+
+                        <Form.Group controlId="formCity">
+                            <Form.Label>Digite o nome da sua cidade</Form.Label>
+                            <Form.Control type="text" placeholder="Cidade" name="city" onChange={handleChange} isInvalid={errors.city} isValid={form.city} />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.city}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Row className="justify-content-center">
+                            <Button variant="primary" type="submit">
+                                Cadastrar CEP
+                            </Button>
+                        </Row>
+                    </Form>
                 </Row>
-                    <Row className="justify-content-center">
-                        {
-                            isSubmitting 
-                                ? <Loader active inline='centered' />
-                                : 
-                            <Row>
-                                    <Form onSubmit={handleSubmit}>
-                                        <Row>
-                                            <Form.Input 
-                                                fluid
-                                                error={errors.numbers ? {
-                                                    content: 'Por favor, insira um CEP', 
-                                                    pointiing: 'below' } : null}
-                                                label="Digite o seu CEP"
-                                                placeholder="CEP"
-                                                name="numbers"
-                                                type="text"
-                                                onChange={handleChange}
-                                                style={{ marginBottom: 20}}
-                                            />
-                                        </Row>
-                                        <Row>
-                                            <Form.Input 
-                                                fluid
-                                                label="Digite o nome da sua cidade"
-                                                error={errors.city ? {
-                                                    content: 'Por favor, insira uma cidade',
-                                                    pointiing: 'below'
-                                                } : null }
-                                                placeholder="Cidade"
-                                                name="city"
-                                                onChange={handleChange}
-                                                type="text"
-                                                style={{ marginBottom: 20 }}
-                                            />
-                                        </Row>
-                                        <Row className="justify-content-center">
-                                            <Button type="submit" variant="success">
-                                                Cadastrar
-                                            </Button>
-                                        </Row>
-                                    </Form>
-                            </Row>
-                        }
-                    </Row>
             </Container>
 
             {/* <CepInput isSubmitting={isSubmitting} handleSubmit={handleSubmit} handleChange={handleChange} errors={errors}/> */}
