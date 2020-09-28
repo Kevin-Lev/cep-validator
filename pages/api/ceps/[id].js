@@ -11,19 +11,15 @@ export default async (req, res) => {
 
     switch(method) {
         case 'GET':
-            console.log("GETTTTT")
             try {
-                console.log(id)
                 const cep = await Cep.findById(id);
 
                 if (!cep) {
-                    console.log("SEM CEPPP")
                     return res.status(400).json({ success: false })
                 }
 
                 res.status(200).json({ success: true, data: cep })
             } catch (error) {
-                console.log("ERRROOO")
                 console.error('GET request: ' + error)
                 res.status(400).json({ sucess: false })
             }

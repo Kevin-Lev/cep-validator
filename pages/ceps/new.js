@@ -60,8 +60,6 @@ export default function NewCep() {
         return err
     }
 
-    console.log('errors')
-    console.log(errors)
 
     const OnlyHasNumbers = (input) => {    
         return /^\d+$/.test(input)
@@ -70,10 +68,8 @@ export default function NewCep() {
     const hasOddAlternation = (input) => {
         for(let i = 0; i < input.length; i++) {
             const oddRegexValidation = new RegExp(`${input.charAt(i)}` + '\\d' + `${input.charAt(i)}`, 'i')
-            console.log('oddRegexValidation')
-            console.log(oddRegexValidation)
+        
             if (oddRegexValidation.test(input)) {
-                console.log("TEM ALTERNANCIA PAR")
                 return true
             }
         }
@@ -90,8 +86,6 @@ export default function NewCep() {
                 },
                 body: JSON.stringify(form)
             })
-            console.log('res Post')
-            console.log(res)
         } catch (err) {
             console.error(err)
         }
@@ -102,6 +96,7 @@ export default function NewCep() {
             <Container style={{ marginTop: 170, marginBottom: 170 }}>
                 <Row className="justify-content-center">
                     <Form onSubmit={handleSubmit}>
+                        <h4>Validador de CEP</h4>
                         <Form.Group controlId="formCep">
                             <Form.Label>Digite o CEP de onde você mora</Form.Label>
                             <Form.Control type="text" placeholder="CEP" name="numbers" maxLength="6" minLength="6" onChange={handleChange} isInvalid={errors.numbers || errors.notOnlyNumbers || errors.hasOddAlternation} isValid={form.numbers && form.numbers.length === 6 && OnlyHasNumbers(form.numbers)} />
