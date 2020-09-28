@@ -1,7 +1,7 @@
-import dbConnect from "../../../util/dbConnect";
-import Cep from '../../../models/Cep'
+import dbConnect from '../../../util/dbConnect';
+import Cep from '../../../models/Cep';
 
-dbConnect()
+dbConnect();
 
 export default async (req, res) => {
     const {
@@ -9,19 +9,19 @@ export default async (req, res) => {
         method
     } = req;
 
-    switch(method) {
+    switch (method) {
         case 'GET':
             try {
                 const cep = await Cep.findById(id);
 
                 if (!cep) {
-                    return res.status(400).json({ success: false })
+                    return res.status(400).json({ success: false });
                 }
 
-                res.status(200).json({ success: true, data: cep })
+                res.status(200).json({ success: true, data: cep });
             } catch (error) {
-                console.error('GET request: ' + error)
-                res.status(400).json({ sucess: false })
+                console.error('GET request: ' + error);
+                res.status(400).json({ sucess: false });
             }
             break;
         case 'PUT':
@@ -32,28 +32,27 @@ export default async (req, res) => {
                 });
 
                 if (!cep) {
-                    return res.status(400).json({ success: false })
+                    return res.status(400).json({ success: false });
                 }
-
             } catch (error) {
-                console.error('PUT request' + error)
-                res.status(400).json({ sucess: false })
+                console.error('PUT request' + error);
+                res.status(400).json({ sucess: false });
             }
             break;
         case 'DELETE':
             try {
-                const deletedCep = await Cep.deleteOne({ _id: id })
+                const deletedCep = await Cep.deleteOne({ _id: id });
 
                 if (!deletedNote) {
-                    return res.status(400).json({ success: false })
+                    return res.status(400).json({ success: false });
                 }
             } catch (error) {
-                console.error('DELETE request: ' + error)
-                res.status(400).json({ sucess: false })
+                console.error('DELETE request: ' + error);
+                res.status(400).json({ sucess: false });
             }
             break;
         default:
-            res.status(400).json({ success: false })
+            res.status(400).json({ success: false });
             break;
     }
-}
+};

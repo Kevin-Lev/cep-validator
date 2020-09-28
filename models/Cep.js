@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const CepSchema = new mongoose.Schema(
     {
@@ -15,6 +15,6 @@ const CepSchema = new mongoose.Schema(
     {
         versionKey: false
     }
-)
+);
 
-module.exports = mongoose.models.Cep || mongoose.model('Cep', CepSchema, 'ceps')
+module.exports = mongoose.models.Cep || mongoose.model('Cep', CepSchema, 'ceps');

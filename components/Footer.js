@@ -1,16 +1,13 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 const Footer = () => (
-    <div >
+    <div>
         <Navbar fixed="bottom" expand="lg" bg="dark" variant="dark">
-            <Navbar.Text className="mx-auto">
-                © Wayne Enterprises
-            </Navbar.Text>
-        </Navbar> 
+            <Navbar.Text className="mx-auto">© Wayne Enterprises</Navbar.Text>
+        </Navbar>
     </div>
-)
+);
 
-
-export default Footer
+export default Footer;

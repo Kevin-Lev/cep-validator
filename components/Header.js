@@ -1,7 +1,7 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
 
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 const Header = () => (
     <div style={{ marginBottom: '5%' }}>
@@ -16,17 +16,13 @@ const Header = () => (
                     <NavDropdown title="Opções do usuário" id="collasible-nav-dropdown">
                         <NavDropdown.Item>
                             <Link href="/ceps/new">
-                                <a style={{ color: 'black' }}>
-                                    Cadastrar CEP
-                                </a>
+                                <a style={{ color: 'black' }}>Cadastrar CEP</a>
                             </Link>
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item>
                             <Link href="/ceps">
-                                <a style={{ color: 'black' }}>
-                                    Lista de CEPs
-                                </a>
+                                <a style={{ color: 'black' }}>Lista de CEPs</a>
                             </Link>
                         </NavDropdown.Item>
                     </NavDropdown>
@@ -34,7 +30,6 @@ const Header = () => (
             </Navbar.Collapse>
         </Navbar>
     </div>
-)
+);
 
-
-export default Header
+export default Header;
