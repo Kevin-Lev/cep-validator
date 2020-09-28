@@ -42,15 +42,19 @@ export default function NewCep() {
         let err = {}
 
         if (!form.numbers) {
-            err.numbers = "Você precisa inserir um CEP"
+            err.numbers = "Você precisa inserir um CEP."
         }
 
-        // if (form.numbers.length !== 6) {
-        //     err.wrongCepLength = "O seu CEP deve ter exatamente 6 dígitos"
-        // }
+        if (!OnlyHasNumbers(form.numbers)) {
+            err.notOnlyNumbers = "Você deve digitar apenas números."
+        }
+
+        if (hasOddAlternation(form.numbers)) {
+            err.hasOddAlternation = "Há alternância de pares no seu CEP."
+        }
 
         if (!form.city) {
-            err.city = "Você precisa inserir uma cidade"
+            err.city = "Você precisa inserir uma cidade."
         }
 
         return err
@@ -58,6 +62,23 @@ export default function NewCep() {
 
     console.log('errors')
     console.log(errors)
+
+    const OnlyHasNumbers = (input) => {    
+        return /^\d+$/.test(input)
+    }
+
+    const hasOddAlternation = (input) => {
+        for(let i = 0; i < input.length; i++) {
+            const oddRegexValidation = new RegExp(`${input.charAt(i)}` + '\\d' + `${input.charAt(i)}`, 'i')
+            console.log('oddRegexValidation')
+            console.log(oddRegexValidation)
+            if (oddRegexValidation.test(input)) {
+                console.log("TEM ALTERNANCIA PAR")
+                return true
+            }
+        }
+        return false
+    }
 
     const createCep = async () => {
         try {
@@ -85,9 +106,9 @@ export default function NewCep() {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formCep">
                             <Form.Label>Digite o CEP de onde você mora</Form.Label>
-                            <Form.Control type="text" placeholder="CEP" name="numbers" maxLength="6" minLength="6" onChange={handleChange} isInvalid={errors.numbers} isValid={form.numbers && form.numbers.length === 6} />
+                            <Form.Control type="text" placeholder="CEP" name="numbers" maxLength="6" minLength="6" onChange={handleChange} isInvalid={errors.numbers || errors.notOnlyNumbers || errors.hasOddAlternation} isValid={form.numbers && form.numbers.length === 6 && OnlyHasNumbers(form.numbers)} />
                             <Form.Control.Feedback type="invalid">
-                                {errors.numbers}
+                                {errors.numbers || errors.notOnlyNumbers || errors.hasOddAlternation}
                             </Form.Control.Feedback>
                             <Form.Text className="text-muted">
                                 Digite números entre 100000 e 999999, sem hífen.
@@ -102,7 +123,7 @@ export default function NewCep() {
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Row className="justify-content-center">
-                            <Button variant="primary" type="submit">
+                            <Button variant="success" type="submit">
                                 Cadastrar CEP
                             </Button>
                         </Row>
