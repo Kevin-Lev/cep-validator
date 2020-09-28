@@ -26,7 +26,9 @@ export default function NewCep() {
         let errs = validate();
         setErrors(errs);
         setIsSubmitting(true);
-        setShowAlert(true);
+        if (Object.keys(errs).length === 0 && errs.constructor === Object) {
+            setShowAlert(true);
+        }
     };
 
     const handleChange = (event) => {
@@ -63,17 +65,19 @@ export default function NewCep() {
     };
 
     const hasOddAlternation = (input) => {
-        for (let i = 0; i < input.length; i++) {
-            const oddRegexValidation = new RegExp(
-                `${input.charAt(i)}` + '\\d' + `${input.charAt(i)}`,
-                'i'
-            );
+        if (OnlyHasNumbers(input)) {
+            for (let i = 0; i < input.length; i++) {
+                const oddRegexValidation = new RegExp(
+                    `${input.charAt(i)}` + '\\d' + `${input.charAt(i)}`,
+                    'i'
+                );
 
-            if (oddRegexValidation.test(input)) {
-                return true;
+                if (oddRegexValidation.test(input)) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
     };
 
     const createCep = async () => {
