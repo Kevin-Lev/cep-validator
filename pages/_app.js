@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import CepInput from '../components/CepInput'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function MyApp({ Component, pageProps }) {
     return (
         <>
-            {/* <Header />
-            <CepInput /> */}
+            <Header />
             <Component {...pageProps} />
+            <Footer />
         </>
     )
 }

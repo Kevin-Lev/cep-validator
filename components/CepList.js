@@ -1,8 +1,8 @@
-import { Table, Container, Row, Col } from 'react-bootstrap'
+import { Table, Container, Row } from 'react-bootstrap'
 
 
 const CepList = ({ ceps }) => (
-    <Container style={{ marginTop: 120, width: '60%'}}>
+    <Container style={{ marginTop: 120, marginBottom: '20%', width: '60%'}}>
         <Row className="justify-content-center">
             <h5>Lista de CEPs cadastrados</h5>
         </Row>

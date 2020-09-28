@@ -1,8 +1,7 @@
-import Header from "../../components/Header";
-import CepInput from "../../components/CepInput";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Container, Row, Button, Form } from 'react-bootstrap'
+import { Container, Row, Button, Form, Alert } from 'react-bootstrap'
+import Link from "next/link";
 
 
 export default function NewCep() {
@@ -10,13 +9,13 @@ export default function NewCep() {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({})
+    const [showAlert, setShowAlert] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
         if (isSubmitting) {
             if (Object.keys(errors).length === 0) {
                 createCep()
-                alert('Success')
             }
             else {
                 setIsSubmitting(false)
@@ -29,6 +28,7 @@ export default function NewCep() {
         let errs = validate();
         setErrors(errs);
         setIsSubmitting(true)
+        setShowAlert(true)
     }
 
     const handleChange = (event) => {
@@ -92,7 +92,6 @@ export default function NewCep() {
             })
             console.log('res Post')
             console.log(res)
-            router.push("/ceps")
         } catch (err) {
             console.error(err)
         }
@@ -100,8 +99,7 @@ export default function NewCep() {
 
     return (
         <>
-            <Header />
-            <Container style={{ marginTop: 170 }}>
+            <Container style={{ marginTop: 170, marginBottom: 170 }}>
                 <Row className="justify-content-center">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formCep">
@@ -129,9 +127,16 @@ export default function NewCep() {
                         </Row>
                     </Form>
                 </Row>
+                <Row className="justify-content-center">
+                    <Alert show={showAlert} style={{ marginTop: 30 }} variant="success">
+                        O CEP foi cadastrado com sucesso! {' '}
+                        <Link href="http://localhost:3000/ceps">
+                            Clique aqui
+                        </Link>
+                        {' '} para vê-lo na lista de CEPs!
+                    </Alert>
+                </Row>
             </Container>
-
-            {/* <CepInput isSubmitting={isSubmitting} handleSubmit={handleSubmit} handleChange={handleChange} errors={errors}/> */}
         </>
     )
 }
